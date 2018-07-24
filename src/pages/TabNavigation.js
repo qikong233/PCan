@@ -21,23 +21,24 @@ export default (Tab = createBottomTabNavigator(
   },
   {
     navigationOptions: ({ navigation }) => ({
+      
       tabBarIcon: ({ focused, tintColor }) => {
-        const { routeName } = navigation.state;
+        const { routeName } = navigation.state
         let iconName
         if (routeName === 'home') {
-            iconName = 'home'
+          iconName = 'home'
         } else if (routeName === 'chat') {
-            iconName = 'comment'
+          iconName = 'comment'
         } else if (routeName === 'shopping') {
-            iconName = 'shopping-cart'
+          iconName = 'shopping-cart'
         } else if (routeName === 'me') {
-            iconName = 'user'
+          iconName = 'user'
         }
-        return <Icon name={iconName} size={25} color={tintColor}/>
+        return <Icon name={iconName} size={25} color={tintColor} />
       }
     }),
     tabBarOptions: {
-      activeTintColor: themeColor,
+      activeTintColor: themeColor
     }
   }
 ))

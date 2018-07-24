@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
-import { Avatar } from 'react-native-elements'
+import { Icon, List, ListItem } from 'react-native-elements'
 import { themeColor, WINDOW_HEIGHT, WINDOW_WIDTH } from '../public'
 
 class Me extends Component {
@@ -23,6 +23,13 @@ class Me extends Component {
     favoriteShop: 66,
     myFootprint: 333
   }
+
+  menuList = [
+    { title: '我的财产', iconName: 'credit-card' },
+    { title: '优惠券', iconName: 'ticket' },
+    { title: '地址管理', iconName: 'map' },
+    { title: '消息中心', iconName: 'comment' }
+  ]
 
   render() {
     return (
@@ -49,12 +56,20 @@ class Me extends Component {
               alignItems: 'center'
             }}
           >
-            <Avatar
-              large
-              rounded
-              icon={{ name: 'user', type: 'font-awesome' }}
-              activeOpacity={1}
-            />
+            <TouchableOpacity
+              style={{
+                width: 63,
+                height: 63,
+                borderRadius: 63 * 0.5,
+                overflow: 'hidden'
+              }}
+            >
+              <Image
+                style={{ flex: 1, width: null, height: null }}
+                source={require('../images/qikong.jpg')}
+                resizeMode="contain"
+              />
+            </TouchableOpacity>
             <Text style={{ fontSize: 17, marginTop: 12 }}>
               {this.state.userName}
             </Text>
@@ -67,18 +82,24 @@ class Me extends Component {
                 justifyContent: 'space-around'
               }}
             >
-              <View style={{justifyContent: 'space-around', alignItems: 'center'}}>
+              <TouchableOpacity
+                style={{ justifyContent: 'space-around', alignItems: 'center' }}
+              >
                 <Text>{this.state.favoriteProduct}</Text>
                 <Text>收藏商品</Text>
-              </View>
-              <View style={{justifyContent: 'space-around', alignItems: 'center'}}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ justifyContent: 'space-around', alignItems: 'center' }}
+              >
                 <Text>{this.state.favoriteShop}</Text>
                 <Text>收藏店铺</Text>
-              </View>
-              <View style={{justifyContent: 'space-around', alignItems: 'center'}}>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{ justifyContent: 'space-around', alignItems: 'center' }}
+              >
                 <Text>{this.state.myFootprint}</Text>
                 <Text>我的足迹</Text>
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
           <View
@@ -87,23 +108,111 @@ class Me extends Component {
               backgroundColor: '#rgba(243, 246, 248, 1)'
             }}
           >
-            <View style={{}}>
+            <View
+              style={{
+                width: WINDOW_WIDTH,
+                height: 123,
+                marginVertical: 7,
+                backgroundColor: 'white'
+              }}
+            >
               <View
                 style={{
+                  flexDirection: 'row',
+                  height: 37,
                   width: WINDOW_WIDTH,
-                  height: 123,
-                  marginVertical: 7,
-                  backgroundColor: 'white'
+                  paddingHorizontal: 12,
+                  alignItems: 'center',
+                  justifyContent: 'space-between'
                 }}
-              />
+              >
+                <Text style={{ color: '#rgba(51, 51, 51, 1)', fontSize: 16 }}>
+                  我的订单
+                </Text>
+                <TouchableOpacity>
+                  <Text style={{ color: 'gray' }}>全部订单></Text>
+                </TouchableOpacity>
+                <View
+                  style={{
+                    position: 'absolute',
+                    bottom: 0,
+                    left: 12,
+                    right: 12,
+                    height: 1,
+                    backgroundColor: '#rgba(243, 243, 243, 1)'
+                  }}
+                />
+              </View>
               <View
                 style={{
-                  width: WINDOW_WIDTH,
-                  height: WINDOW_HEIGHT - 123 - 172 - 64 - 44,
-                  backgroundColor: 'white'
+                  flexDirection: 'row',
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                  paddingHorizontal: 35
                 }}
-              />
+              >
+                <TouchableOpacity>
+                  <Icon
+                    name="credit-card"
+                    type="font-awesome"
+                    color={themeColor}
+                  />
+                  <Text style={{ marginTop: 12 }}>待付款</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon name="ios-list-box" type="ionicon" color={themeColor} />
+                  <Text style={{ marginTop: 12 }}>待配送</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon
+                    name="van-utility"
+                    type="material-community"
+                    color={themeColor}
+                  />
+                  <Text style={{ marginTop: 12 }}>配送中</Text>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Icon
+                    name="comment-text-outline"
+                    type="material-community"
+                    color={themeColor}
+                  />
+                  <Text style={{ marginTop: 12 }}>待评价</Text>
+                </TouchableOpacity>
+              </View>
             </View>
+            <List
+              containerStyle={{
+                marginTop: 0,
+                width: WINDOW_WIDTH,
+                height: WINDOW_HEIGHT - 123 - 172 - 64 - 44,
+                backgroundColor: 'white',
+                borderTopColor: 'transparent'
+              }}
+            >
+              {this.menuList.map((item, i) => {
+                return (
+                  <ListItem
+                    containerStyle={{
+                      borderTopColor: 'transparent',
+                      borderBottomColor: '#rgba(243, 243, 243, 1)'
+                    }}
+                    title={item.title}
+                    titleStyle={{ fontSize: 17 }}
+                    titleContainerStyle={{ marginLeft: 8 }}
+                    leftIcon={
+                      <Icon
+                        name={item.iconName}
+                        size={17}
+                        type="font-awesome"
+                        color={themeColor}
+                      />
+                    }
+                  />
+                )
+              })}
+            </List>
           </View>
         </ScrollView>
       </View>
