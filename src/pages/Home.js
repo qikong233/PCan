@@ -20,6 +20,7 @@ import Swiper from 'react-native-swiper'
 import { themeColor, WINDOW_WIDTH } from '../public'
 import FoodCell from '../components/FoodCell'
 import FoodDetail from './FoodDetail'
+import Merge from './Merge'
 
 class Home extends Component {
   static navigationOptions = {
@@ -67,10 +68,6 @@ class Home extends Component {
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(getRecommend())
-  }
-
-  goMergeOrder = () => {
-    this.props.navigation.navigate('detail')
   }
 
   render() {
@@ -210,9 +207,10 @@ class Home extends Component {
                 {recommendData.map((item, i) => {
                   return (
                     <FoodCell
+                      key={`foodCell_${i}`}
                       item={item}
                       index={i}
-                      onPress={this.goMergeOrder}
+                      onPress={() => this.props.navigation.navigate('detail', {item: item})}
                     />
                   )
                 })}
@@ -264,12 +262,15 @@ let mapStateToProps = state => {
 }
 
 const CHome = connect(mapStateToProps)(Home)
-const HomeNavigator = (Navigator = createStackNavigator({
+const Navigator = createStackNavigator({
   home: CHome,
-  detail: FoodDetail
-}))
+  detail: FoodDetail,
+  merge: Merge,
+}, {
+  initialRouteName: 'merge'
+})
 
-HomeNavigator.navigationOptions = ({ navigation }) => {
+Navigator.navigationOptions = ({ navigation }) => {
   let tabBarVisible = true;
   if (navigation.state.index > 0) {
     tabBarVisible = false;
@@ -280,4 +281,4 @@ HomeNavigator.navigationOptions = ({ navigation }) => {
   };
 }
 
-export default HomeNavigator
+export default Navigator
