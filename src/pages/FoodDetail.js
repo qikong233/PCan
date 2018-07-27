@@ -76,7 +76,7 @@ export default class FoodDetail extends Component {
             <Text
               style={{ fontSize: 19, fontWeight: 'bold', marginBottom: 15 }}
             >
-              {item.title}
+              {item.foodName}
             </Text>
             <Text
               style={{

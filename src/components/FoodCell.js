@@ -21,7 +21,7 @@ export default class FoodCell extends Component {
           }}
         >
           <View>
-            <Text style={{ fontSize: 17 }}>{item.title}</Text>
+            <Text style={{ fontSize: 17 }}>{item.foodName}</Text>
             <Text style={{ marginTop: 4, color: 'red', fontSize: 17 }}>
               ￥{item.price}
               <Text

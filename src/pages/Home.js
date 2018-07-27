@@ -267,9 +267,9 @@ let mapStateToProps = state => {
   return { home }
 }
 
-const CHome = connect(mapStateToProps)(Home)
+const connectHome = connect(mapStateToProps)(Home)
 const Navigator = createStackNavigator({
-  home: CHome,
+  home: connectHome,
   detail: FoodDetail,
   merge: Merge
 })
