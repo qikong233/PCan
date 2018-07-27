@@ -36,6 +36,7 @@ export default class FoodDetail extends Component {
               name="ios-arrow-back"
               type="ionicon"
               color="#rgba(5, 5, 5, 1)"
+              onPress={() => this.props.navigation.pop()}
             />
           }
         />
@@ -285,6 +286,7 @@ export default class FoodDetail extends Component {
               justifyContent: 'center',
               alignItems: 'center'
             }}
+            onPress={() => this.props.navigation.navigate('merge', {item: item})}
           >
             <Text>￥15</Text>
             <Text>发起拼单</Text>

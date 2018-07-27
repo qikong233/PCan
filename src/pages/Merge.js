@@ -4,10 +4,19 @@ import { Card, Icon } from 'react-native-elements'
 import { themeColor, WINDOW_WIDTH } from '../public'
 
 export default class Merge extends Component {
-  static navigationOptions = {
+  static navigationOptions = ({ navigation }) => ({
     title: '拼餐',
-    headerStyle: { backgroundColor: themeColor }
-  }
+    headerStyle: { backgroundColor: themeColor },
+    headerLeft: (
+      <Icon
+        name="ios-arrow-back"
+        type="ionicon"
+        color="#rgba(5, 5, 5, 1)"
+        containerStyle={{ marginLeft: 20 }}
+        onPress={() => navigation.pop()}
+      />
+    )
+  })
 
   flow = [
     '选择心怡商品',
@@ -87,6 +96,8 @@ export default class Merge extends Component {
   }
 
   render() {
+    const item = this.props.navigation.getParam('item', {})
+
     return (
       <View
         style={{
@@ -96,8 +107,81 @@ export default class Merge extends Component {
         }}
       >
         <View
-          style={{ height: 128, width: WINDOW_WIDTH, backgroundColor: 'white' }}
-        />
+          style={{
+            paddingHorizontal: 15,
+            paddingVertical: 15,
+            width: WINDOW_WIDTH,
+            backgroundColor: 'white'
+          }}
+        >
+          <Text style={{ color: '#rgba(103, 103, 103, 1.00)' }}>
+            店铺： 过桥米线
+          </Text>
+          <View style={{ flexDirection: 'row', marginTop: 15 }}>
+            <Image
+              source={item.picUrl}
+              style={{
+                width: 81,
+                height: 81,
+                borderColor: '#rgba(240, 240, 240, 1.00)',
+                borderWidth: 1
+              }}
+            />
+            <View style={{ marginLeft: 15 }}>
+              <Text style={{ fontSize: 17, marginBottom: 12 }}>
+                {item.title}
+              </Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'flex-end',
+                  marginBottom: 7
+                }}
+              >
+                <Text
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 17,
+                    color: 'red'
+                  }}
+                >
+                  ￥{item.price}
+                </Text>
+                <View style={{ marginLeft: 10 }}>
+                  <Text
+                    style={{
+                      color: '#rgba(100, 100, 100, 1.00)',
+                      fontSize: 14
+                    }}
+                  >
+                    ￥{item.orginPrice}
+                  </Text>
+                  <View
+                    style={{
+                      position: 'absolute',
+                      left: 0,
+                      right: 0,
+                      top: 7,
+                      height: 1,
+                      backgroundColor: '#rgba(100, 100, 100, 1.00)'
+                    }}
+                  />
+                </View>
+              </View>
+              <View
+                style={{
+                  width: 65,
+                  height: 22,
+                  backgroundColor: themeColor,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Text>2人拼团</Text>
+              </View>
+            </View>
+          </View>
+        </View>
         <Text
           style={{
             color: themeColor,
@@ -113,19 +197,16 @@ export default class Merge extends Component {
         </Text>
         <Card
           containerStyle={{
-            height: 169,
             width: 315,
             borderColor: 'transparent',
             borderRadius: 5,
-            backgroundColor: 'white',
-            alignItems: 'center'
+            backgroundColor: 'white'
           }}
         >
           <View
             style={{
               flexDirection: 'row',
-              justifyContent: 'flex-start',
-              width: 315 - 40
+              justifyContent: 'flex-start'
             }}
           >
             <View style={{ alignItems: 'center', marginRight: 20 }}>
@@ -148,16 +229,33 @@ export default class Merge extends Component {
               </View>
             </View>
             <Image
-              source={require('../images/qikong.jpg')}
-              style={{ width: 52, height: 52, borderRadius: 26 }}
+              source={require('../images/user.png')}
+              style={{
+                width: 52,
+                height: 52,
+                borderRadius: 26,
+                backgroundColor: 'lightgray'
+              }}
             />
           </View>
           <Text style={{ textAlign: 'center', fontSize: 16, marginTop: 8 }}>
             剩余<Text>03: 21: 11</Text>失效
           </Text>
-          <TouchableOpacity style={{marginTop: 10, height: 28, width: 225, backgroundColor: themeColor, borderRadius: 5, justifyContent: 'center', alignItems: 'center'}}>
-            <Text>邀请好友参加团</Text>
-          </TouchableOpacity>
+          <View style={{ alignItems: 'center' }}>
+            <TouchableOpacity
+              style={{
+                marginTop: 15,
+                height: 35,
+                width: 225,
+                backgroundColor: themeColor,
+                borderRadius: 5,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Text>邀请好友参加团</Text>
+            </TouchableOpacity>
+          </View>
         </Card>
         <View
           style={{

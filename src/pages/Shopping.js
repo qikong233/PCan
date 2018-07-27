@@ -4,11 +4,13 @@ import {
   Text,
 } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
+import { themeColor } from '../public';
 
 class Shopping extends Component {
 
   static navigationOptions = {
-    title: '购物车'
+    title: '购物车',
+    headerStyle: {backgroundColor: themeColor}
   }
 
   render() {

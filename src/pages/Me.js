@@ -1,20 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { createStackNavigator } from 'react-navigation'
-import { Icon, List, ListItem } from 'react-native-elements'
+import { Icon, List, ListItem, Header } from 'react-native-elements'
 import { themeColor, WINDOW_HEIGHT, WINDOW_WIDTH } from '../public'
 
 class Me extends Component {
   static navigationOptions = {
-    headerStyle: {
-      backgroundColor: themeColor,
-      borderBottomColor: 'transparent'
-    },
-    headerRight: (
-      <TouchableOpacity style={{ marginRight: 10 }}>
-        <Text>设置</Text>>
-      </TouchableOpacity>
-    )
+    header: null
   }
 
   state = {
@@ -34,6 +26,14 @@ class Me extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <Header
+          outerContainerStyles={{backgroundColor: themeColor, borderBottomColor: 'transparent'}}
+          rightComponent={
+            <TouchableOpacity>
+              <Text>设置</Text>
+            </TouchableOpacity>
+          }
+        />
         <View
           style={{
             backgroundColor: themeColor,
@@ -41,7 +41,8 @@ class Me extends Component {
             top: 0,
             left: 0,
             right: 0,
-            height: 180
+            height: 180,
+            zIndex: -1
           }}
         />
         <ScrollView

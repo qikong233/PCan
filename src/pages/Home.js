@@ -35,7 +35,7 @@ class Home extends Component {
         lightTheme
         containerStyle={{
           backgroundColor: 'transparent',
-          width: WINDOW_WIDTH - 80,
+          flex: 1,
           borderTopColor: 'transparent',
           borderBottomColor: 'transparent'
         }}
@@ -43,20 +43,24 @@ class Home extends Component {
       />
     ),
     headerLeft: (
-      <Icon
-        name="qrcode"
-        type="font-awesome"
-        color="#rgba(74, 80, 86, 1)"
-        iconStyle={{ marginLeft: 10 }}
-      />
+      <TouchableOpacity>
+        <Icon
+          name="qrcode"
+          type="font-awesome"
+          color="#rgba(74, 80, 86, 1)"
+          containerStyle={{ marginLeft: 15 }}
+        />
+      </TouchableOpacity>
     ),
     headerRight: (
-      <Icon
-        name="ellipsis-h"
-        type="font-awesome"
-        color="#rgba(74, 80, 86, 1)"
-        iconStyle={{ marginRight: 10 }}
-      />
+      <TouchableOpacity>
+        <Icon
+          name="ellipsis-h"
+          type="font-awesome"
+          color="#rgba(74, 80, 86, 1)"
+          containerStyle={{ marginRight: 15 }}
+        />
+      </TouchableOpacity>
     )
   }
 
@@ -210,7 +214,9 @@ class Home extends Component {
                       key={`foodCell_${i}`}
                       item={item}
                       index={i}
-                      onPress={() => this.props.navigation.navigate('detail', {item: item})}
+                      onPress={() =>
+                        this.props.navigation.navigate('detail', { item: item })
+                      }
                     />
                   )
                 })}
@@ -265,20 +271,18 @@ const CHome = connect(mapStateToProps)(Home)
 const Navigator = createStackNavigator({
   home: CHome,
   detail: FoodDetail,
-  merge: Merge,
-}, {
-  initialRouteName: 'merge'
+  merge: Merge
 })
 
 Navigator.navigationOptions = ({ navigation }) => {
-  let tabBarVisible = true;
+  let tabBarVisible = true
   if (navigation.state.index > 0) {
-    tabBarVisible = false;
+    tabBarVisible = false
   }
 
   return {
-    tabBarVisible,
-  };
+    tabBarVisible
+  }
 }
 
 export default Navigator
