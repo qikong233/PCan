@@ -1,23 +1,69 @@
 import React, { Component } from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, TouchableOpacity } from 'react-native'
 
 export default class ShoopingCell extends Component {
   render() {
     const { item, count } = this.props
     return (
-      <View style={{ height: 103, flexDirection: 'row' }}>
-        <Image style={{ width: 80, hegiht: 80 }} />
-        <View>
-          <Text>{item.foodName}</Text>
-          <Text>规格：标准</Text>
-          <Text>￥ {item.price}</Text>
-        </View>
+      <View
+        style={[
+          {
+            height: 103,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            backgroundColor: '#rgba(242, 242, 242, 1.00)'
+          },
+          this.props.innerStyle
+        ]}
+      >
         <View style={{ flexDirection: 'row' }}>
-          <Text>➖</Text>
-          <View>
+          <Image
+            style={{
+              width: 80,
+              height: 80,
+              borderColor: '#rgba(232, 232, 232, 1.00)',
+              borderWidth: 1
+            }}
+            source={item.picUrl}
+            resizeMode="cover"
+          />
+          <View
+            style={{
+              height: 80,
+              justifyContent: 'space-between',
+              marginLeft: 15
+            }}
+          >
+            <Text style={{ fontSize: 17 }}>{item.foodName}</Text>
+            <Text style={{ color: '#rgba(153, 153, 153, 1.00)' }}>
+              规格：标准
+            </Text>
+            <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'red' }}>
+              ￥ {item.price}
+            </Text>
+          </View>
+        </View>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <TouchableOpacity>
+            <Text>➖</Text>
+          </TouchableOpacity>
+          <View
+            style={{
+              height: 25,
+              width: 50,
+              marginHorizontal: 12,
+              justifyContent: 'center',
+              alignItems: 'center',
+              borderColor: '#rgba(232, 232, 232, 1.00)',
+              borderWidth: 1
+            }}
+          >
             <Text>{count}</Text>
           </View>
-          <Text>➕</Text>
+          <TouchableOpacity>
+            <Text>➕</Text>
+          </TouchableOpacity>
         </View>
       </View>
     )

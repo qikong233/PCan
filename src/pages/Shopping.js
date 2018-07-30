@@ -19,13 +19,18 @@ class Shopping extends Component {
     this.props.shopping.car.map((item, index) => {
       arr.push(
         <View key={`store_${index}`}>
-          <Text>{item.storeName}</Text>
-          {item.foods.map((foodItem, foodIndex) => {
+          <Text
+            style={{ paddingHorizontal: 15, marginTop: 10, marginBottom: 5 }}
+          >
+            店铺：{item.storeName}
+          </Text>
+          {item.foods.map((food, foodIndex) => {
             return (
               <ShoppingCell
-                item={foodItem}
-                count={item.count}
+                item={food.foodItem}
+                count={food.count}
                 key={`Sotre_${index}_cell_${foodIndex}`}
+                innerStyle={{ paddingHorizontal: 15 }}
               />
             )
           })}
@@ -48,7 +53,7 @@ class Shopping extends Component {
             marginTop: 8
           }}
         >
-          {this.renderFoodInCar}
+          {this.renderFoodInCar()}
         </ScrollView>
         <View
           style={{

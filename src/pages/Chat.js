@@ -21,11 +21,11 @@ class Chat extends Component {
   }
 
   chatList = [
-    { name: 'John', avatar_url: '' },
-    { name: 'Sarah', avatar_url: '' },
-    { name: 'Brayden', avatar_url: '' },
-    { name: 'Brian', avatar_url: '' },
-    { name: 'Daisy', avatar_url: '' }
+    { name: 'John', avatar_url: '', department: '太平洋汽车网' },
+    { name: 'Sarah', avatar_url: '', department: '太平洋电脑网' },
+    { name: 'Brayden', avatar_url: '', department: '太平洋亲子网' },
+    { name: 'Brian', avatar_url: '', department: '太平洋家居网' },
+    { name: 'Daisy', avatar_url: '', department: '研发中心' }
   ]
 
   renderChatList() {
@@ -39,14 +39,18 @@ class Chat extends Component {
             height: 88,
             paddingHorizontal: 14
           }}
+          key={`chat_${index}`}
         >
           <Image
             style={{
               width: 55,
               height: 55,
-              backgroundColor: 'lightgray',
-              borderRadius: 55 * 0.5
+              // backgroundColor: 'lightgray',
+              borderRadius: 55 * 0.5,
+              overflow: 'hidden'
             }}
+            // source={require('')}
+            resizeMode='center'
           />
           <View
             style={{
@@ -54,8 +58,10 @@ class Chat extends Component {
               marginLeft: 14,
             }}
           >
+            <View style={{flexDirection: 'row', alignItems: 'flex-end', height: 27}}>
             <Text style={{fontSize: 17, marginTop: 7}}>{item.name}</Text>
-            <Text>{item.subTitle}</Text>
+            <Text style={{fontSize: 15, color: 'gray', marginLeft: 3}}>/{item.department}</Text>
+            </View>
           </View>
           <View
             style={{

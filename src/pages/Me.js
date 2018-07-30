@@ -195,6 +195,7 @@ class Me extends Component {
               {this.menuList.map((item, i) => {
                 return (
                   <ListItem
+                    key={`me_${i}`}
                     containerStyle={{
                       borderTopColor: 'transparent',
                       borderBottomColor: '#rgba(243, 243, 243, 1)'

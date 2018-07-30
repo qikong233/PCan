@@ -5,13 +5,9 @@ import {
   StyleSheet,
   ScrollView,
   Image,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native'
 import { connect } from 'react-redux'
-import {
-  reduxifyNavigator,
-  createReactNavigationReduxMiddleware
-} from 'react-navigation-redux-helpers'
 import { SearchBar, Icon, Button, List } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation'
 import { getRecommend } from '../actions/homeAction'
@@ -83,7 +79,7 @@ class Home extends Component {
 
     return (
       <View style={styles.container}>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <Swiper
             containerStyle={styles.warpper}
             autoplay

@@ -19,7 +19,8 @@ const initialState = {
         }
       ]
     }
-  ]
+  ],
+  allCount: 0,
 }
 
 function getList(stores, Field) {

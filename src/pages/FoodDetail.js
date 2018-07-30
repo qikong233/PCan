@@ -16,9 +16,13 @@ export default class FoodDetail extends Component {
     header: null
   }
 
-  render() {
+  state = {
+    select: 0,
+    count: 1
+  }
 
-    const {navigation} = this.props
+  render() {
+    const { navigation } = this.props
     const item = navigation.getParam('item')
     return (
       <SafeAreaView
@@ -90,27 +94,35 @@ export default class FoodDetail extends Component {
             <Text style={{ fontSize: 17, marginBottom: 10 }}>规格</Text>
             <View style={{ flexDirection: 'row', marginBottom: 15 }}>
               <TouchableOpacity
-                style={{
-                  width: 55,
-                  height: 30,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderColor: 'lightgray',
-                  borderWidth: 1,
-                  marginRight: 18
-                }}
+                style={[
+                  {
+                    width: 55,
+                    height: 30,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderColor: 'lightgray',
+                    borderWidth: 1,
+                    marginRight: 18
+                  },
+                  this.state.select === 0 && { backgroundColor: themeColor }
+                ]}
+                onPress={() => this.setState({ select: 0 })}
               >
                 <Text>大份</Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={{
-                  width: 55,
-                  height: 30,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderColor: 'lightgray',
-                  borderWidth: 1
-                }}
+                style={[
+                  {
+                    width: 55,
+                    height: 30,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderColor: 'lightgray',
+                    borderWidth: 1
+                  },
+                  this.state.select === 1 && { backgroundColor: themeColor }
+                ]}
+                onPress={() => this.setState({ select: 1 })}
               >
                 <Text>小份</Text>
               </TouchableOpacity>
@@ -124,7 +136,13 @@ export default class FoodDetail extends Component {
                 alignItems: 'center'
               }}
             >
-              <TouchableOpacity style={{ marginHorizontal: 10 }}>
+              <TouchableOpacity
+                style={{ marginHorizontal: 10 }}
+                onPress={() => {
+                  var count = this.state.count - 1
+                  this.setState({ count: count <= 1 ? 1 : count })
+                }}
+              >
                 <Text>➖</Text>
               </TouchableOpacity>
               <View
@@ -138,10 +156,15 @@ export default class FoodDetail extends Component {
                 }}
               >
                 <Text style={{ marginHorizontal: 10, textAlign: 'center' }}>
-                  1
+                  {this.state.count}
                 </Text>
               </View>
-              <TouchableOpacity style={{ marginHorizontal: 10 }}>
+              <TouchableOpacity
+                style={{ marginHorizontal: 10 }}
+                onPress={() =>
+                  this.setState({ count: (this.state.count += 1) })
+                }
+              >
                 <Text>➕</Text>
               </TouchableOpacity>
             </View>
@@ -236,37 +259,37 @@ export default class FoodDetail extends Component {
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
           >
             <Icon
-              color='#rgba(51, 51, 51, 1.00)'
+              color="#rgba(51, 51, 51, 1.00)"
               name="star-o"
               type="font-awesome"
               size={22}
               containerStyle={{ marginBottom: 6 }}
             />
-            <Text style={{ color:'gray', fontSize: 13 }}>收藏</Text>
+            <Text style={{ color: 'gray', fontSize: 13 }}>收藏</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
           >
             <Icon
-            color='#rgba(51, 51, 51, 1.00)'
+              color="#rgba(51, 51, 51, 1.00)"
               name="shop"
               type="entypo"
               size={22}
               containerStyle={{ marginBottom: 4 }}
             />
-            <Text style={{ color:'gray', fontSize: 13 }}>店铺</Text>
+            <Text style={{ color: 'gray', fontSize: 13 }}>店铺</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
           >
             <Icon
-            color='#rgba(51, 51, 51, 1.00)'
+              color="#rgba(51, 51, 51, 1.00)"
               name="commenting-o"
               type="font-awesome"
               size={22}
               containerStyle={{ marginBottom: 5 }}
             />
-            <Text style={{ color:'gray', fontSize: 13 }}>客服</Text>
+            <Text style={{ color: 'gray', fontSize: 13 }}>客服</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -286,7 +309,9 @@ export default class FoodDetail extends Component {
               justifyContent: 'center',
               alignItems: 'center'
             }}
-            onPress={() => this.props.navigation.navigate('merge', {item: item})}
+            onPress={() =>
+              this.props.navigation.navigate('merge', { item: item })
+            }
           >
             <Text>￥15</Text>
             <Text>发起拼单</Text>

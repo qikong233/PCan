@@ -9,7 +9,6 @@ export default class PCButton extends Component {
   contentW = 0
 
   renderUnderLine = () => {
-    console.log((this.contentW - this.state.underLineW) / 2)
     if (this.props.underLine) {
       return (
         <View

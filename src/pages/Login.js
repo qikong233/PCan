@@ -4,13 +4,17 @@ import {
   Text,
   TextInput,
   StyleSheet,
-  TouchableOpacity
+  ScrollView,
+  TouchableOpacity,
+  Keyboard,
+  Platform
 } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
-import { login } from '../actions/loginAction'
+import Loader from '../components/Loader'
 
-import { themeColor, WINDOW_WIDTH } from '../public'
+import { login, showld, dissld, showerr, disserr } from '../actions/loginAction'
+import { themeColor, WINDOW_WIDTH, WINDOW_HEIGHT } from '../public'
 import PCButton from '../components/PCButton'
 import { UserAuth } from '../net/fetch'
 
@@ -22,21 +26,57 @@ class Login extends Component {
   state = { select: 0 }
 
   login = () => {
+    const { dispatch } = this.props
     const user = {
-      name: '123',
-      pwd: '123'
+      name: this.user,
+      pwd: this.pwd
     }
-    UserAuth(user).then(() => {
-      const { dispatch } = this.props
-      dispatch(login())
-    }).catch(() => {
-      alert('账号密码错误')
+    dispatch(showld())
+    UserAuth(user)
+      .then(() => {
+        dispatch(dissld())
+        dispatch(login())
+      })
+      .catch(() => {
+        dispatch(showerr())
+        this.timeout = setTimeout(() => {
+          dispatch(disserr())
+        }, 1000)
+        // alert('账号密码错误')
+      })
+  }
+  componentDidMount() {
+    const showName = Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow'
+    const dissName = Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide'
+    this.keyboardShow = Keyboard.addListener(showName, () => {
+      this.scrollView &&
+        this.scrollView.scrollTo({
+          y: (WINDOW_HEIGHT * 2) / 10,
+          animated: true
+        })
     })
+    this.keyboardHide = Keyboard.addListener(dissName, () => {
+      this.scrollView &&
+        this.scrollView.scrollTo({
+          y: 0,
+          animated: true
+        })
+    })
+  }
+
+  componentWillUnmount() {
+    this.keyboardShow && this.keyboardShow.remove()
+    this.keyboardHide && this.keyboardHide.remove()
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        scrollEnabled={false}
+        ref={r => this.scrollView = r}
+      >
         <View style={styles.header}>
           <Text style={{ fontSize: 40, fontWeight: 'bold', color: themeColor }}>
             PCAN
@@ -83,12 +123,13 @@ class Login extends Component {
             }}
           >
             <View
-              style={{ width: WINDOW_WIDTH - 30, height: 44, marginBottom: 10 }}
+              style={{ width: WINDOW_WIDTH - 60, height: 44, marginBottom: 10 }}
             >
               <TextInput
                 placeholder="账号"
                 style={{ flex: 1 }}
                 underlineColorAndroid="transparent"
+                onChangeText={value => (this.user = value)}
               />
               <View
                 style={{
@@ -102,12 +143,14 @@ class Login extends Component {
               />
             </View>
             <View
-              style={{ width: WINDOW_WIDTH - 30, height: 44, marginBottom: 42 }}
+              style={{ width: WINDOW_WIDTH - 60, height: 44, marginBottom: 42 }}
             >
               <TextInput
-                placeholder="账号"
+                placeholder="密码"
+                secureTextEntry
                 style={{ flex: 1 }}
                 underlineColorAndroid="transparent"
+                onChangeText={value => (this.pwd = value)}
               />
               <View
                 style={{
@@ -162,7 +205,13 @@ class Login extends Component {
             <Icon name="qq" type="font-awesome" color={themeColor} />
           </View>
         </View>
-      </View>
+        <Loader
+          visible={this.props.login.loading || this.props.login.err}
+          color={themeColor}
+          error={this.props.login.err}
+          errorText="登录失败"
+        />
+      </ScrollView>
     )
   }
 }
@@ -182,13 +231,13 @@ const styles = StyleSheet.create({
   header: {
     justifyContent: 'center',
     alignItems: 'center',
-    flex: 3
+    height: (WINDOW_HEIGHT * 3) / 10
   },
   form: {
-    flex: 4
+    height: (WINDOW_HEIGHT * 4) / 10
   },
   thirdLogin: {
-    flex: 3,
+    height: (WINDOW_HEIGHT * 3) / 10,
     marginTop: 67,
     alignItems: 'center'
   }

@@ -17,4 +17,6 @@ if (
   isIPX = true
 }
 
-export { WINDOW_WIDTH, WINDOW_HEIGHT, themeColor, isIPX }
+const loadType = { CircleFlip: 'CircleFlip', Bounce: 'Bounce', CubeGrid: '9CubeGrid' }
+
+export { WINDOW_WIDTH, WINDOW_HEIGHT, themeColor, isIPX, loadType }
