@@ -14,14 +14,13 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default (Tab = createBottomTabNavigator(
   {
-    home: HomeScreen,
     chat: ChatScreen,
+    home: HomeScreen,
     shopping: ShoppingScreen,
     me: MeScreen
   },
   {
     navigationOptions: ({ navigation }) => ({
-      
       tabBarIcon: ({ focused, tintColor }) => {
         const { routeName } = navigation.state
         let iconName

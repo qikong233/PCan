@@ -67,7 +67,7 @@ class Me extends Component {
             >
               <Image
                 style={{ flex: 1, width: null, height: null }}
-                source={require('../images/qikong.jpg')}
+                source={require('../images/user0.jpg')}
                 resizeMode="contain"
               />
             </TouchableOpacity>

@@ -9,3 +9,5 @@ export const GETRECOMMEND = 'getrecommend'
 
 export const ADDFOOD = 'addfood'
 export const DELFOOD = 'delfood'
+
+export const SENDMSG = 'sendmsg'

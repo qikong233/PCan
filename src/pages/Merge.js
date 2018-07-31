@@ -7,15 +7,8 @@ export default class Merge extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: '拼餐',
     headerStyle: { backgroundColor: themeColor },
-    headerLeft: (
-      <Icon
-        name="ios-arrow-back"
-        type="ionicon"
-        color="#rgba(5, 5, 5, 1)"
-        containerStyle={{ marginLeft: 20 }}
-        onPress={() => navigation.pop()}
-      />
-    )
+    headerTintColor: '#rgba(47, 52, 54, 1.00)',
+    headerBackTitle: ''
   })
 
   flow = [
@@ -211,7 +204,7 @@ export default class Merge extends Component {
           >
             <View style={{ alignItems: 'center', marginRight: 20 }}>
               <Image
-                source={require('../images/qikong.jpg')}
+                source={require('../images/user0.jpg')}
                 style={{ width: 52, height: 52, borderRadius: 26 }}
               />
               <View
@@ -229,7 +222,7 @@ export default class Merge extends Component {
               </View>
             </View>
             <Image
-              source={require('../images/user.png')}
+              source={require('../images/user0.jpg')}
               style={{
                 width: 52,
                 height: 52,

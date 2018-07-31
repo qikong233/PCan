@@ -17,6 +17,8 @@ if (
   isIPX = true
 }
 
+const isAndroid = Platform.OS === 'android'
+
 const loadType = { CircleFlip: 'CircleFlip', Bounce: 'Bounce', CubeGrid: '9CubeGrid' }
 
-export { WINDOW_WIDTH, WINDOW_HEIGHT, themeColor, isIPX, loadType }
+export { WINDOW_WIDTH, WINDOW_HEIGHT, themeColor, isIPX, loadType, isAndroid }

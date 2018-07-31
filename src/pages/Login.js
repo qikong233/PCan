@@ -7,14 +7,13 @@ import {
   ScrollView,
   TouchableOpacity,
   Keyboard,
-  Platform
 } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
 import Loader from '../components/Loader'
 
 import { login, showld, dissld, showerr, disserr } from '../actions/loginAction'
-import { themeColor, WINDOW_WIDTH, WINDOW_HEIGHT } from '../public'
+import { themeColor, WINDOW_WIDTH, WINDOW_HEIGHT, isAndroid } from '../public'
 import PCButton from '../components/PCButton'
 import { UserAuth } from '../net/fetch'
 
@@ -46,8 +45,8 @@ class Login extends Component {
       })
   }
   componentDidMount() {
-    const showName = Platform.OS === 'android' ? 'keyboardDidShow' : 'keyboardWillShow'
-    const dissName = Platform.OS === 'android' ? 'keyboardDidHide' : 'keyboardWillHide'
+    const showName = isAndroid ? 'keyboardDidShow' : 'keyboardWillShow'
+    const dissName = isAndroid ? 'keyboardDidHide' : 'keyboardWillHide'
     this.keyboardShow = Keyboard.addListener(showName, () => {
       this.scrollView &&
         this.scrollView.scrollTo({

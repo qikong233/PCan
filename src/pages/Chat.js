@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
+import { connect } from 'react-redux'
 import { createStackNavigator } from 'react-navigation'
-import { themeColor } from '../public'
-import { Icon, List, ListItem } from '../../node_modules/react-native-elements'
+import Conversation from './Conversation'
+import { themeColor, isAndroid } from '../public'
+import { Icon, List } from '../../node_modules/react-native-elements'
+
+const radius = isAndroid ? 1 : 0.5
 
 class Chat extends Component {
   static navigationOptions = {
@@ -20,17 +24,9 @@ class Chat extends Component {
     )
   }
 
-  chatList = [
-    { name: 'John', avatar_url: '', department: '太平洋汽车网' },
-    { name: 'Sarah', avatar_url: '', department: '太平洋电脑网' },
-    { name: 'Brayden', avatar_url: '', department: '太平洋亲子网' },
-    { name: 'Brian', avatar_url: '', department: '太平洋家居网' },
-    { name: 'Daisy', avatar_url: '', department: '研发中心' }
-  ]
-
   renderChatList() {
     var arr = []
-    this.chatList.map((item, index) => {
+    this.props.chat.chatList.map((item, index) => {
       arr.push(
         <TouchableOpacity
           style={{
@@ -40,28 +36,44 @@ class Chat extends Component {
             paddingHorizontal: 14
           }}
           key={`chat_${index}`}
+          onPress={() =>
+            this.props.navigation.navigate('Conversation', {
+              chatItem: item
+            })
+          }
         >
           <Image
             style={{
               width: 55,
               height: 55,
-              // backgroundColor: 'lightgray',
-              borderRadius: 55 * 0.5,
+              borderRadius: 55 * radius,
               overflow: 'hidden'
             }}
-            // source={require('')}
-            resizeMode='center'
+            source={item.avatar_url}
+            resizeMode="center"
           />
           <View
             style={{
               height: 55,
               marginLeft: 14,
+              justifyContent: 'space-between'
             }}
           >
-            <View style={{flexDirection: 'row', alignItems: 'flex-end', height: 27}}>
-            <Text style={{fontSize: 17, marginTop: 7}}>{item.name}</Text>
-            <Text style={{fontSize: 15, color: 'gray', marginLeft: 3}}>/{item.department}</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                height: 27,
+              }}
+            >
+              <Text style={{ fontSize: 17}}>{item.name}</Text>
+              <Text style={{ fontSize: 15, color: 'gray', marginLeft: 3 }}>
+                /{item.department}
+              </Text>
             </View>
+            <Text style={{ fontSize: 15, color: 'gray' }}>
+              {item.conversation[item.conversation.length - 1].content}
+            </Text>
           </View>
           <View
             style={{
@@ -94,6 +106,27 @@ class Chat extends Component {
   }
 }
 
-export default createStackNavigator({
-  Chat
+const mapPropToState = state => {
+  const { chat } = state
+  return { chat }
+}
+
+const connectChat = connect(mapPropToState)(Chat)
+
+const Navigator = createStackNavigator({
+  Chat: { screen: connectChat, navigationOptions: { headerBackTitle: ' ' } },
+  Conversation
 })
+
+Navigator.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true
+  if (navigation.state.index > 0) {
+    tabBarVisible = false
+  }
+
+  return {
+    tabBarVisible
+  }
+}
+
+export default Navigator

@@ -40,6 +40,7 @@ export default class FoodDetail extends Component {
               name="ios-arrow-back"
               type="ionicon"
               color="#rgba(5, 5, 5, 1)"
+              size={35}
               onPress={() => this.props.navigation.pop()}
             />
           }
@@ -208,9 +209,9 @@ export default class FoodDetail extends Component {
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Image
                   style={{ width: 41, height: 41, borderRadius: 41 * 0.5 }}
-                  source={require('../images/qikong.jpg')}
+                  source={require('../images/user0.jpg')}
                 />
-                <Text style={{ fontSize: 15, marginLeft: 10 }}>qikong</Text>
+                <Text style={{ fontSize: 15, marginLeft: 10 }}>user0</Text>
               </View>
               <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <View style={{ alignItems: 'center', marginRight: 15 }}>
