@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, ScrollView, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { createStackNavigator } from 'react-navigation'
 import Conversation from './Conversation'
-import { themeColor, isAndroid } from '../public'
-import { Icon, List } from '../../node_modules/react-native-elements'
+import { themeColor, isAndroid, WINDOW_WIDTH } from '../public'
+import { Icon, List } from 'react-native-elements'
 
 const radius = isAndroid ? 1 : 0.5
 
@@ -71,7 +71,7 @@ class Chat extends Component {
                 /{item.department}
               </Text>
             </View>
-            <Text style={{ fontSize: 15, color: 'gray' }}>
+            <Text ellipsizeMode='tail' numberOfLines={1} style={{ fontSize: 15, color: 'gray', width: WINDOW_WIDTH * 0.7 }}>
               {item.conversation[item.conversation.length - 1].content}
             </Text>
           </View>

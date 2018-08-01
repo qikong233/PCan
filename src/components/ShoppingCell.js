@@ -36,35 +36,42 @@ export default class ShoopingCell extends Component {
             }}
           >
             <Text style={{ fontSize: 17 }}>{item.foodName}</Text>
-            <Text style={{ color: '#rgba(153, 153, 153, 1.00)' }}>
+            <Text style={{ color: '#rgba(153, 153, 153, 1.00)', fontSize: 12, marginTop: 5}}>
               规格：标准
             </Text>
+            {this.props.isPayment && (
+              <Text style={{ color: '#rgba(153, 153, 153, 1.00)', fontSize: 12 }}>
+              数量：{count}
+            </Text>
+            )}
             <Text style={{ fontSize: 17, fontWeight: 'bold', color: 'red' }}>
-              ￥ {item.price}
+              ￥ {item.price }
             </Text>
           </View>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <TouchableOpacity>
-            <Text>➖</Text>
-          </TouchableOpacity>
-          <View
-            style={{
-              height: 25,
-              width: 50,
-              marginHorizontal: 12,
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderColor: '#rgba(232, 232, 232, 1.00)',
-              borderWidth: 1
-            }}
-          >
-            <Text>{count}</Text>
+        {!this.props.isPayment && (
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <TouchableOpacity>
+              <Text>➖</Text>
+            </TouchableOpacity>
+            <View
+              style={{
+                height: 25,
+                width: 50,
+                marginHorizontal: 12,
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderColor: '#rgba(232, 232, 232, 1.00)',
+                borderWidth: 1
+              }}
+            >
+              <Text>{count}</Text>
+            </View>
+            <TouchableOpacity>
+              <Text>➕</Text>
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity>
-            <Text>➕</Text>
-          </TouchableOpacity>
-        </View>
+        )}
       </View>
     )
   }

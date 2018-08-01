@@ -66,7 +66,6 @@ export default function(state = initialState, action) {
       let index = names.indexOf(action.name)
       var chatList = state.chatList
       chatList[index].conversation.push({isMe: true, content: action.msg})
-      console.log(chatList)
       return Object.assign({}, state, {
         chatList
       })

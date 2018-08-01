@@ -1,10 +1,22 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, TextInput, Image } from 'react-native'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  Keyboard,
+} from 'react-native'
 import { WINDOW_WIDTH } from '../public'
 
 export default class extends Component {
   state = {
-    speakerMode: false
+    speakerMode: false,
+    inputValue: ''
+  }
+
+  blur = () => {
+    Keyboard.dismiss()
   }
 
   componentWillUnmount() {
@@ -74,6 +86,8 @@ export default class extends Component {
           </TouchableOpacity>
         ) : (
           <TextInput
+            underlineColorAndroid='transparent'
+            value={this.state.inputValue}
             style={{
               flex: 1,
               backgroundColor: 'white',
@@ -82,14 +96,19 @@ export default class extends Component {
               borderWidth: 1,
               borderColor: '#rgba(231, 231, 231, 1.00)'
             }}
-            returnKeyType='done'
+            enablesReturnKeyAutomatically
+            returnKeyType="send"
+            blurOnSubmit={false}
             onSubmitEditing={() => {
-              this.textInput.clear()
               this.props.onSubmitEditing && this.props.onSubmitEditing()
+              this.textInput.clear()
             }}
-            onChangeText={this.props.onChangeText}
+            onTouchStart={this.props.onTouchStart}
+            onChangeText={value => {
+              this.setState({ inputValue: value })
+              this.props.onChangeText && this.props.onChangeText(value)
+            }}
             ref={r => (this.textInput = r)}
-
           />
         )}
         <TouchableOpacity

@@ -13,29 +13,38 @@ export default class ChatCell extends Component {
 
     const icon = (
       <Image
-        key='icon'
+        key="icon"
         source={imageSource}
         style={{
           width: 50,
           height: 50,
           borderRadius: 50 * Radius,
-          marginHorizontal: 15
+          marginHorizontal: 10
         }}
       />
     )
 
     const content = (
       <View
-        key='content'
+        key="content"
         style={{
-          backgroundColor: this.props.item.isMe ? themeColor : 'white',
-          borderRadius: 5,
-          justifyContent: 'center',
-          alignItems: 'center',
-          marginVertical: 5,
+          flex: 1,
+          alignItems: this.props.item.isMe ? 'flex-end' : 'flex-start',
+          paddingLeft: this.props.item.isMe ? 65 : 0,
+          paddingRight: this.props.item.isMe ? 0 : 65,
         }}
       >
-        <Text style={{ fontSize: 15, margin: 10 }}>{item.content}</Text>
+        <View
+          style={{
+            backgroundColor: this.props.item.isMe ? themeColor : 'white',
+            borderRadius: 5,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 5,
+          }}
+        >
+          <Text style={{ fontSize: 15, marginHorizontal: 10, marginVertical: 12 }}>{item.content}</Text>
+        </View>
       </View>
     )
 
@@ -53,8 +62,9 @@ export default class ChatCell extends Component {
       <View
         style={{
           flexDirection: 'row',
-          marginTop: 15,
-          justifyContent: this.props.item.isMe ? 'flex-end' : 'flex-start'
+          marginVertical: 7.5,
+          justifyContent: this.props.item.isMe ? 'flex-end' : 'flex-start',
+          paddingHorizontal: 5
         }}
       >
         {arr}

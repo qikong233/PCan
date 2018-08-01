@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { Button } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation'
 import { themeColor } from '../public'
-import ShoppingCell from '../components/ShoppingCell'
+import ShoppingCart from '../components/ShopCart'
 
 class Shopping extends Component {
   static navigationOptions = {
@@ -18,23 +18,7 @@ class Shopping extends Component {
     var arr = []
     this.props.shopping.car.map((item, index) => {
       arr.push(
-        <View key={`store_${index}`}>
-          <Text
-            style={{ paddingHorizontal: 15, marginTop: 10, marginBottom: 5 }}
-          >
-            店铺：{item.storeName}
-          </Text>
-          {item.foods.map((food, foodIndex) => {
-            return (
-              <ShoppingCell
-                item={food.foodItem}
-                count={food.count}
-                key={`Sotre_${index}_cell_${foodIndex}`}
-                innerStyle={{ paddingHorizontal: 15 }}
-              />
-            )
-          })}
-        </View>
+        <ShoppingCart item={item} index={index} key={`cart_${index}`}/>
       )
     })
     return arr

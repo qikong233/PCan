@@ -310,9 +310,14 @@ export default class FoodDetail extends Component {
               justifyContent: 'center',
               alignItems: 'center'
             }}
-            onPress={() =>
-              this.props.navigation.navigate('merge', { item: item })
-            }
+            onPress={() => {
+              payItem = {
+                storeName: item.storeName,
+                foods: [{ foodItem: item, count: this.state.count }]
+              }
+              this.props.navigation.navigate('pay', { item: payItem })
+              console.log(item)
+            }}
           >
             <Text>￥15</Text>
             <Text>发起拼单</Text>

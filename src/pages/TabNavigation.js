@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-  createStackNavigator,
   createBottomTabNavigator
 } from 'react-navigation'
 
@@ -14,10 +13,10 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 export default (Tab = createBottomTabNavigator(
   {
-    chat: ChatScreen,
     home: HomeScreen,
+    chat: ChatScreen,
     shopping: ShoppingScreen,
-    me: MeScreen
+    me: MeScreen,
   },
   {
     navigationOptions: ({ navigation }) => ({

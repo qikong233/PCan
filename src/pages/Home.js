@@ -17,6 +17,7 @@ import { themeColor, WINDOW_WIDTH } from '../public'
 import FoodCell from '../components/FoodCell'
 import FoodDetail from './FoodDetail'
 import Merge from './Merge'
+import Pay from './Pay'
 
 class Home extends Component {
   static navigationOptions = {
@@ -267,7 +268,8 @@ const connectHome = connect(mapStateToProps)(Home)
 const Navigator = createStackNavigator({
   home: connectHome,
   detail: FoodDetail,
-  merge: Merge
+  merge: Merge,
+  pay: Pay
 })
 
 Navigator.navigationOptions = ({ navigation }) => {
