@@ -1,16 +1,25 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
-import {themeColor, WINDOW_WIDTH} from '../public'
+import { themeColor, WINDOW_WIDTH } from '../public'
 
 export default class FoodCell extends Component {
   render() {
     const item = this.props.item
     return (
-      <View style={{ backgroundColor: 'white' }} key={`foodCell_${this.props.index}`}>
-        <Image
-          source={item.picUrl}
+      <View
+        style={{ backgroundColor: 'white' }}
+        key={`foodCell_${this.props.index}`}
+      >
+        <TouchableOpacity
           style={{ width: WINDOW_WIDTH, height: 165 }}
-        />
+          activeOpacity={1}
+          onPress={this.props.onPress}
+        >
+          <Image
+            source={item.picUrl}
+            style={{ flex: 1, width: null, height: null }}
+          />
+        </TouchableOpacity>
         <View
           style={{
             marginVertical: 7,

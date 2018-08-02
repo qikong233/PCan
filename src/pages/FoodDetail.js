@@ -292,7 +292,7 @@ export default class FoodDetail extends Component {
             />
             <Text style={{ color: 'gray', fontSize: 13 }}>客服</Text>
           </TouchableOpacity>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             style={{
               flex: 2,
               backgroundColor: themeColor,
@@ -302,10 +302,10 @@ export default class FoodDetail extends Component {
           >
             <Text>￥30</Text>
             <Text>单独购买</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <TouchableOpacity
             style={{
-              flex: 2,
+              flex: 3,
               backgroundColor: '#rgba(252, 223, 59, 1.00)',
               justifyContent: 'center',
               alignItems: 'center'
@@ -316,10 +316,9 @@ export default class FoodDetail extends Component {
                 foods: [{ foodItem: item, count: this.state.count }]
               }
               this.props.navigation.navigate('pay', { item: payItem })
-              console.log(item)
             }}
           >
-            <Text>￥15</Text>
+            <Text>￥{item.price}</Text>
             <Text>发起拼单</Text>
           </TouchableOpacity>
         </View>

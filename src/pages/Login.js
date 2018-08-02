@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Keyboard,
+  Image
 } from 'react-native'
 import { Button, Icon } from 'react-native-elements'
 import { connect } from 'react-redux'
@@ -74,13 +75,14 @@ class Login extends Component {
         style={styles.container}
         showsVerticalScrollIndicator={false}
         scrollEnabled={false}
-        ref={r => this.scrollView = r}
+        ref={r => (this.scrollView = r)}
       >
         <View style={styles.header}>
-          <Text style={{ fontSize: 40, fontWeight: 'bold', color: themeColor }}>
-            PCAN
-          </Text>
-          <Text style={{ fontSize: 30, color: themeColor }}>拼餐</Text>
+          <Image
+            source={require('../images/logo.png')}
+            style={{ height:  WINDOW_HEIGHT * 0.18, marginTop: 20}}
+            resizeMode='contain'
+          />
         </View>
         <View style={styles.form}>
           <View

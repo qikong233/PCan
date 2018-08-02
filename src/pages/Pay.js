@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native'
 import { Icon } from 'react-native-elements'
 import ShoppingCart from '../components/ShopCart'
+import Payment from '../components/Payment'
 import { themeColor, isIPX } from '../public'
 
 export default class Pay extends Component {
@@ -26,7 +27,7 @@ export default class Pay extends Component {
     this.item = props.navigation.getParam('item')
   }
 
-  state = { select: 0 }
+  state = { select: 0, pay: false, paydone: false }
 
   payment = [
     {
@@ -88,11 +89,17 @@ export default class Pay extends Component {
   }
 
   getPrice = () => {
-      var price = 0
-      this.item.foods.map((item) => {
-        price += item.foodItem.price * item.count
-      })
-      return price
+    var price = 0
+    this.item.foods.map(item => {
+      price += item.foodItem.price * item.count
+    })
+    return price
+  }
+
+  donePay = () => {
+    this.setState({ pay: false, paydone: true }, () => {
+      this.props.navigation.navigate('merge', { item: this.item.foods })
+    })
   }
 
   renderBottom = () => {
@@ -138,6 +145,7 @@ export default class Pay extends Component {
             justifyContent: 'center',
             alignItems: 'center'
           }}
+          onPress={() => this.setState({ pay: true })}
         >
           <Text style={{ fontSize: 17, fontWeight: '500' }}>立即支付</Text>
         </TouchableOpacity>
@@ -146,7 +154,7 @@ export default class Pay extends Component {
   }
 
   renderFood = () => {
-      return <ShoppingCart item={this.item} isPayment />
+    return <ShoppingCart item={this.item} isPayment />
   }
 
   render() {
@@ -170,7 +178,20 @@ export default class Pay extends Component {
         <View style={{ marginTop: 6 }}>{this.renderFood()}</View>
         <View style={{ marginTop: 6 }}>{this.renderPaymentMethod()}</View>
         {this.renderBottom()}
+        {!this.state.paydone && <Payment
+          visible={this.state.pay}
+          close={() => this.setState({ pay: false })}
+          donePay={this.donePay}
+        />}
       </SafeAreaView>
     )
   }
+}
+
+const WaitToPay = (props) => {
+  return null
+}
+
+const DonePay = (props) => {
+  return null
 }

@@ -23,7 +23,7 @@ export default class Merge extends Component {
     this.flow.map((item, i) => {
       if (i === this.flow.length - 1) {
         arr.push(
-          <View style={{ alignItems: 'center', marginHorizontal: 3 }}>
+          <View style={{ alignItems: 'center', marginHorizontal: 3 }} key={`flow_${i}`}>
             <View
               style={{
                 width: 26,
@@ -50,7 +50,7 @@ export default class Merge extends Component {
         )
       } else {
         arr.push(
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row' }} key={`flow_${i}`}>
             <View style={{ alignItems: 'center', marginHorizontal: 3 }}>
               <View
                 style={{
@@ -88,8 +88,88 @@ export default class Merge extends Component {
     return arr
   }
 
+  renderFood = (item, index) => {
+    return (
+      <View
+        key={`food_${index}`}
+        style={{
+          paddingHorizontal: 15,
+          paddingVertical: 15,
+          width: WINDOW_WIDTH,
+          backgroundColor: 'white'
+        }}
+      >
+        <Text style={{ color: '#rgba(103, 103, 103, 1.00)' }}>
+          店铺： 过桥米线
+        </Text>
+        <View style={{ flexDirection: 'row', marginTop: 15 }}>
+          <Image
+            source={item.picUrl}
+            style={{
+              width: 81,
+              height: 81,
+              borderColor: '#rgba(240, 240, 240, 1.00)',
+              borderWidth: 1
+            }}
+          />
+          <View style={{ marginLeft: 15 }}>
+            <Text style={{ fontSize: 17, marginBottom: 12 }}>{item.foodName}</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                marginBottom: 7
+              }}
+            >
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 17,
+                  color: 'red'
+                }}
+              >
+                ￥{item.price}
+              </Text>
+              <View style={{ marginLeft: 10 }}>
+                <Text
+                  style={{
+                    color: '#rgba(100, 100, 100, 1.00)',
+                    fontSize: 14
+                  }}
+                >
+                  ￥{item.orginPrice}
+                </Text>
+                <View
+                  style={{
+                    position: 'absolute',
+                    left: 0,
+                    right: 0,
+                    top: 7,
+                    height: 1,
+                    backgroundColor: '#rgba(100, 100, 100, 1.00)'
+                  }}
+                />
+              </View>
+            </View>
+            <View
+              style={{
+                width: 65,
+                height: 22,
+                backgroundColor: themeColor,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+            >
+              <Text>2人拼团</Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    )
+  }
+
   render() {
-    const item = this.props.navigation.getParam('item', {})
+    const foods = this.props.navigation.getParam('item', {})
 
     return (
       <View
@@ -99,82 +179,9 @@ export default class Merge extends Component {
           backgroundColor: '#rgba(243, 246, 248, 1.00)'
         }}
       >
-        <View
-          style={{
-            paddingHorizontal: 15,
-            paddingVertical: 15,
-            width: WINDOW_WIDTH,
-            backgroundColor: 'white'
-          }}
-        >
-          <Text style={{ color: '#rgba(103, 103, 103, 1.00)' }}>
-            店铺： 过桥米线
-          </Text>
-          <View style={{ flexDirection: 'row', marginTop: 15 }}>
-            <Image
-              source={item.picUrl}
-              style={{
-                width: 81,
-                height: 81,
-                borderColor: '#rgba(240, 240, 240, 1.00)',
-                borderWidth: 1
-              }}
-            />
-            <View style={{ marginLeft: 15 }}>
-              <Text style={{ fontSize: 17, marginBottom: 12 }}>
-                {item.title}
-              </Text>
-              <View
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'flex-end',
-                  marginBottom: 7
-                }}
-              >
-                <Text
-                  style={{
-                    fontWeight: 'bold',
-                    fontSize: 17,
-                    color: 'red'
-                  }}
-                >
-                  ￥{item.price}
-                </Text>
-                <View style={{ marginLeft: 10 }}>
-                  <Text
-                    style={{
-                      color: '#rgba(100, 100, 100, 1.00)',
-                      fontSize: 14
-                    }}
-                  >
-                    ￥{item.orginPrice}
-                  </Text>
-                  <View
-                    style={{
-                      position: 'absolute',
-                      left: 0,
-                      right: 0,
-                      top: 7,
-                      height: 1,
-                      backgroundColor: '#rgba(100, 100, 100, 1.00)'
-                    }}
-                  />
-                </View>
-              </View>
-              <View
-                style={{
-                  width: 65,
-                  height: 22,
-                  backgroundColor: themeColor,
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
-              >
-                <Text>2人拼团</Text>
-              </View>
-            </View>
-          </View>
-        </View>
+        {foods.map((item, index) => {
+          return this.renderFood(item.foodItem, index)
+        })}
         <Text
           style={{
             color: themeColor,
