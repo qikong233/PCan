@@ -89,6 +89,8 @@ export default class Merge extends Component {
   }
 
   renderFood = (item, index) => {
+    // console.log('item:')
+    // console.log(item)
     return (
       <View
         key={`food_${index}`}
@@ -170,7 +172,6 @@ export default class Merge extends Component {
 
   render() {
     const foods = this.props.navigation.getParam('item', {})
-
     return (
       <View
         style={{

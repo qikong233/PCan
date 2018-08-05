@@ -18,6 +18,7 @@ import FoodCell from '../components/FoodCell'
 import FoodDetail from './FoodDetail'
 import Merge from './Merge'
 import Pay from './Pay'
+import Initiate from './Initiate'
 
 class Home extends Component {
   static navigationOptions = {
@@ -128,7 +129,7 @@ class Home extends Component {
               />
               <Text style={{ marginTop: 10 }}>快领券</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('initiate')}>
               <Icon name="clipboard" type="feather" color={themeColor} />
               <Text style={{ marginTop: 10 }}>发起拼团</Text>
             </TouchableOpacity>
@@ -269,7 +270,8 @@ const Navigator = createStackNavigator({
   home: connectHome,
   detail: FoodDetail,
   merge: Merge,
-  pay: Pay
+  pay: Pay,
+  initiate: Initiate
 })
 
 Navigator.navigationOptions = ({ navigation }) => {
