@@ -118,7 +118,7 @@ export default class Merge extends Component {
         }}
       >
         <Text style={{ color: '#rgba(103, 103, 103, 1.00)' }}>
-          店铺： 过桥米线
+          店铺： {item.storeName}
         </Text>
         <View style={{ flexDirection: 'row', marginTop: 15 }}>
           <Image

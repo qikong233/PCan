@@ -91,7 +91,7 @@ export default class FoodDetail extends Component {
                 marginBottom: 15
               }}
             >
-              月售229 好评率98%
+              好评率98%
             </Text>
             <Text style={{ fontSize: 17, marginBottom: 10 }}>规格</Text>
             <View style={{ flexDirection: 'row', marginBottom: 15 }}>
@@ -320,7 +320,7 @@ export default class FoodDetail extends Component {
             }}
           >
             <Text>￥{item.price}</Text>
-            <Text>发起拼单</Text>
+            <Text>去拼单</Text>
           </TouchableOpacity>
         </View>
       </SafeAreaView>
