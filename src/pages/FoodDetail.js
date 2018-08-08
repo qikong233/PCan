@@ -36,13 +36,14 @@ export default class FoodDetail extends Component {
             zIndex: 2
           }}
           leftComponent={
-            <Icon
-              name="ios-arrow-back"
-              type="ionicon"
-              color="#rgba(5, 5, 5, 1)"
-              size={35}
-              onPress={() => this.props.navigation.pop()}
-            />
+            <TouchableOpacity onPress={() => this.props.navigation.pop()}>
+              <Icon
+                name="ios-arrow-back"
+                type="ionicon"
+                color="#rgba(5, 5, 5, 1)"
+                size={35}
+              />
+            </TouchableOpacity>
           }
         />
         <ScrollView

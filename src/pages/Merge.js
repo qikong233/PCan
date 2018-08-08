@@ -8,7 +8,20 @@ export default class Merge extends Component {
     title: '拼餐',
     headerStyle: { backgroundColor: themeColor },
     headerTintColor: '#rgba(47, 52, 54, 1.00)',
-    headerBackTitle: ''
+    headerBackTitle: '',
+    headerLeft: (
+      <TouchableOpacity
+        style={{ paddingLeft: 8 }}
+        onPress={() => navigation.navigate('home')}
+      >
+        <Icon
+          name="ios-arrow-back"
+          type="ionicon"
+          color="#rgba(5, 5, 5, 1)"
+          size={35}
+        />
+      </TouchableOpacity>
+    )
   })
 
   flow = [
@@ -23,7 +36,10 @@ export default class Merge extends Component {
     this.flow.map((item, i) => {
       if (i === this.flow.length - 1) {
         arr.push(
-          <View style={{ alignItems: 'center', marginHorizontal: 3 }} key={`flow_${i}`}>
+          <View
+            style={{ alignItems: 'center', marginHorizontal: 3 }}
+            key={`flow_${i}`}
+          >
             <View
               style={{
                 width: 26,
@@ -115,7 +131,9 @@ export default class Merge extends Component {
             }}
           />
           <View style={{ marginLeft: 15 }}>
-            <Text style={{ fontSize: 17, marginBottom: 12 }}>{item.foodName}</Text>
+            <Text style={{ fontSize: 17, marginBottom: 12 }}>
+              {item.foodName}
+            </Text>
             <View
               style={{
                 flexDirection: 'row',
@@ -230,7 +248,7 @@ export default class Merge extends Component {
               </View>
             </View>
             <Image
-              source={require('../images/user0.jpg')}
+              source={require('../images/default_user.png')}
               style={{
                 width: 52,
                 height: 52,

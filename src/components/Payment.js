@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity, Modal, Animated, Text } from 'react-native'
+import { View, TouchableOpacity, Modal, Animated, Text, Image } from 'react-native'
 import { Icon, Button } from 'react-native-elements'
 import Spin from 'react-native-spinkit'
 import { themeColor, WINDOW_WIDTH, WINDOW_HEIGHT, isIPX } from '../public'
@@ -46,6 +46,11 @@ export default class Payment extends Component {
   }
 
   render() {
+    const payWay = isIPX ? 'Face ID' : '指纹支付'
+    const payImg = isIPX
+      ? require('../images/faceID.png')
+      : require('../images/finger-print.png')
+
     return (
       <Modal
         visible={this.props.visible}
@@ -111,12 +116,12 @@ export default class Payment extends Component {
                   marginTop: 50
                 }}
               >
-                指纹支付
+                {payWay}
               </Text>
             )}
             {this.state.payLoading || this.state.paySuccess ? null : (
-              <View style={{ marginTop: 20 }}>
-                <Icon name="ios-finger-print" type="ionicon" size={80} />
+              <View style={{ marginTop: 20, height: WINDOW_WIDTH, alignItems: 'center' }}>
+                <Image source={payImg} style={{width: 80, height: 80}}/>
               </View>
             )}
             {this.state.payLoading || this.state.paySuccess ? null : (

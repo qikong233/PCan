@@ -178,20 +178,22 @@ export default class Pay extends Component {
         <View style={{ marginTop: 6 }}>{this.renderFood()}</View>
         <View style={{ marginTop: 6 }}>{this.renderPaymentMethod()}</View>
         {this.renderBottom()}
-        {!this.state.paydone && <Payment
-          visible={this.state.pay}
-          close={() => this.setState({ pay: false })}
-          donePay={this.donePay}
-        />}
+        {!this.state.paydone && (
+          <Payment
+            visible={this.state.pay}
+            close={() => this.setState({ pay: false })}
+            donePay={this.donePay}
+          />
+        )}
       </SafeAreaView>
     )
   }
 }
 
-const WaitToPay = (props) => {
+const WaitToPay = props => {
   return null
 }
 
-const DonePay = (props) => {
+const DonePay = props => {
   return null
 }

@@ -6,6 +6,7 @@ export const SHOWERR = 'showerr'
 export const DISSERR = 'disserr'
 
 export const GETRECOMMEND = 'getrecommend'
+export const ADDORDER = 'addorder'
 
 export const ADDFOOD = 'addfood'
 export const DELFOOD = 'delfood'

@@ -4,8 +4,10 @@ import ImagePicker from "react-native-image-picker";
 import { Card, Button } from "react-native-elements";
 import { themeColor, WINDOW_WIDTH } from "../public";
 import { createFoodItem } from '../net/fetch'
+import { connect } from 'react-redux'
+import { addOrder } from '../actions/homeAction'
 
-export default class Initiate extends Component {
+class Initiate extends Component {
   static navigationOptions = {
     title: "发起拼团",
     headerStyle: { backgroundColor: themeColor },
@@ -24,9 +26,10 @@ export default class Initiate extends Component {
       storeName: this.state.storeName,
       foodName: this.state.foodName,
       price: this.state.price,
-      picUrl: this.state.chooseImg
+      picUrl: this.state.chooseImg,
     }
     foodItem = {foodItem: createFoodItem(foodItem)}
+    this.props.dispatch(addOrder(foodItem))
     this.props.navigation.navigate('merge', {item: [foodItem]})
   };
 
@@ -94,7 +97,7 @@ export default class Initiate extends Component {
           >
             {this.state.chooseImg.map((item, index) => {
               return (
-                <View style={{ width: 100, height: 100, padding: 10 }}>
+                <View style={{ width: 100, height: 100, padding: 10 }} key={`imageChoose_${index}`}>
                   <Image
                     key={`choose_image${index}`}
                     source={item}
@@ -208,3 +211,10 @@ class DetailInput extends Component {
     );
   }
 }
+
+let mapStateToProps = state => {
+  const { home } = state
+  return { home }
+}
+
+export default connect(mapStateToProps)(Initiate)

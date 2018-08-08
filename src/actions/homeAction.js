@@ -5,3 +5,10 @@ export let getRecommend = () => {
         type: types.GETRECOMMEND
     }
 }
+
+export let addOrder = (item) => {
+    return {
+        type: types.ADDORDER,
+        order: item,
+    }
+}
